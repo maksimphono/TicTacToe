@@ -1,9 +1,11 @@
-import BoardView from "./views/BoardView.jsx";
+import BoardComponent from "./components/BoardComponent.jsx";
 
 function App() {
   return (
     <>
-      <BoardView></BoardView>
+      <BoardComponent
+        colNumber = {3}
+      />
     </>
   );
 }

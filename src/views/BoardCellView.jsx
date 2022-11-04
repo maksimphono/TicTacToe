@@ -1,11 +1,15 @@
 import {useState} from 'react';
-
+import {Button} from "react-bootstrap";
+import "../css/Cell_style.scss";
 
 function BoardCellView(props){
+    const click = event => {
+        alert("Click");
+    };
+    console.log("Render Cell");
     return (
         <>
-        <h1>Board Cell View</h1>
-        
+            <Button className="btn-secondary" variant="outline-dark" />
         </>
     );
 }
