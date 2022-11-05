@@ -34,7 +34,7 @@ function Board(props){
                             <BoardCellView
                                 x = {i} 
                                 y = {j}
-                                sign = {signs}
+                                signs = {signs}
                                 updateMatrix = {updateMatrix}
                              />
                         </Col>
