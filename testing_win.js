@@ -3,14 +3,11 @@ const [size, fullRow, currSign] = [4, 4, "X"];
 class SignNode {
     static get directionsGroups() { return [ [0, 1, '|'], [1, 0, '-'], [1, 1, 'dr'], [-1, 1, 'dl'] ]};
     
-    constructor () {
-        this.sign = '';
+    constructor (mat, x, y, sign) {
+        //this.sign = '';
         this.groups = {'-' : null, '|' : null, 'dr' : null, 'dl' : null};
-    }
-    opposite = (mat, dx, dy) => (mat[-x] && mat[-x][-y]);
-
-    setUp = function (mat, x, y, sign){
         this.sign = sign;
+        mat[x][y] = this;
         this.placeOnBoard(mat, x, y);
     }
     win = function (){
@@ -27,8 +24,8 @@ class SignNode {
             
             if (!mat[x + dx] || !mat[x + dx][y + dy] || mat[x + dx][y + dy].sign !== this.sign)
                 [dx, dy] = [-dx, -dy]; 
-            pivotCell = mat[x + dx] && mat[x + dx][y + dy] || undefined;
-            oppositeCell = mat[x - dx] && mat[x - dx][y - dy] || undefined;
+            pivotCell = mat[x + dx] && mat[x + dx][y + dy];
+            oppositeCell = mat[x - dx] && mat[x - dx][y - dy];
             
             if (pivotCell && pivotCell.sign === this.sign){
                 console.log("Got neighbour on ", x + dx, y + dy, gr);
@@ -48,12 +45,22 @@ class SignNode {
 }
 
 const mat = [
-    [new SignNode(), new SignNode(), new SignNode(), new SignNode()], 
-    [new SignNode(), new SignNode(), new SignNode(), new SignNode()], 
-    [new SignNode(), new SignNode(), new SignNode(), new SignNode()],
-    [new SignNode(), new SignNode(), new SignNode(), new SignNode()]
+    [],
+    [],
+    [],
+    []
 ]
 let [dx, dy] = [0, 0]
+let node1 = new SignNode(mat, 1, 2, "X");
+new SignNode(mat, 1, 3, "X");
+new SignNode(mat, 1, 1, "X");
+new SignNode(mat, 2, 2, "X");
+new SignNode(mat, 0, 2, "X");
+new SignNode(mat, 0, 3, "X");
+new SignNode(mat, 3, 0, "X");
+new SignNode(mat, 2, 1, "X");
+
+/*
 mat[1 + dx][1 + dy].setUp(mat, 1 + dx, 1 + dy, "X");
 //console.log(mat[1][1].groups);
 mat[1][2].setUp(mat, 1, 2, "X");
@@ -65,3 +72,4 @@ mat[0][2].setUp(mat, 0, 2, "X");
 mat[0][3].setUp(mat, 0, 3, "X");
 mat[3][0].setUp(mat, 3, 0, "X");
 mat[2][1].setUp(mat, 2, 1, "X");
+*/
