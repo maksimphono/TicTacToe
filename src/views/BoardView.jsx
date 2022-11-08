@@ -1,7 +1,8 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useMemo} from 'react';
 import BoardCellView from "./BoardCellView.jsx";
 import {Container, Row, Col} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {SignNode} from "../testing_win.js";
 
 function range(length){
     return Array.from({ length }, (_, i) => i); 
@@ -10,21 +11,22 @@ function range(length){
 
 function Board(props){
     const row = range(props.colNumber);
-    const [signs, setSigns] = useState([..."XO"]);
-    
-    const tictacmatrix = row.map(i => [...row.map(j => '')]);
-    
+    const signs = useMemo(() => [..."XO"]);
+    const tictacmatrix = useMemo(() => (row.map(i => [...row.map(j => null)])), []);
+    console.log(props.playerNum);
+
     const updateMatrix = (x, y) => {
-        tictacmatrix[x][y] = signs[0];
+        new SignNode(tictacmatrix, x, y, signs[0]);
         signs.push(signs.shift());
+        //signs[0] = (signs[0] + 1) % props.playerNum;
     }
     
-    console.table(tictacmatrix);
+    //console.table(tictacmatrix);
 
     return (
         <>
             <h1>Board View</h1>
-            <Container className="d-grid justify-content-center" style={{gap: "1vw"}}>
+            <Container className="d-grid justify-content-center mb-5" style={{gap: "1vw"}}>
             {console.log("Row : ", row)}
             {row.map((i) => {
                 {console.log("Render Col with i = ", i)}

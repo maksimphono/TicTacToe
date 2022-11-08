@@ -5,6 +5,7 @@ function App() {
     <>
       <BoardComponent
         colNumber = {5}
+        playerNum = {4}
       />
     </>
   );

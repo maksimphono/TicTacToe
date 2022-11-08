@@ -9,6 +9,7 @@ function BoardComponent(props){
             <h1 className = "display-5">Here is your board:</h1>
             <BoardView
                 colNumber = {props.colNumber}
+                playerNum = {props.playerNum}
             />
         </>
     );

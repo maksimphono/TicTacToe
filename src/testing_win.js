@@ -9,10 +9,6 @@ export class SignNode {
         mat[x][y] = this;
         this.placeOnBoard(mat, x, y);
     }
-    win = function (){
-        console.log(`${this.sign} Won!!`);
-        alert(`${this.sign} Won!!`);
-    }
     placeOnBoard = function (mat, x, y){
         let pivotCell = null;
         let oppositeCell = null;
@@ -37,10 +33,11 @@ export class SignNode {
                 this.groups[gr] = pivotCell.groups[gr];
                 console.log("This Group set up to ", this.groups[gr][0]);
                 if (this.groups[gr][0] >= FULL_ROW){
-                    this.win();
+                    return true;
                 }
             }
         }
+        return false;
     }
 }
 /*
