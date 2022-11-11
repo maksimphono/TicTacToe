@@ -26,7 +26,7 @@ function BoardCellView(props){
                 ref = {selfRef}
                 className="btn-secondary"
                 variant="outline-dark"
-                onhandleClick = {handleClick}>
+                onClick = {handleClick}>
                 <span>{sign}</span>
             </Button>
         </>

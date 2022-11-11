@@ -1,17 +1,21 @@
-import {useState, useRef, useMemo} from 'react';
+import {useState, memo, useMemo} from 'react';
 import BoardCellView from "./BoardCellView.jsx";
 import {Container, Row, Col} from "react-bootstrap";
+import TurnOfLabel from "./Turn_of_label.jsx";       
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/Board_style.scss";
 import placeOnBoard from "../testing_win.js";
+import { useEffect } from 'react';
 
 function range(length){
     return Array.from({ length }, (_, i) => i); 
 }
 
+const areEq = (prev, next) => (true);
 
 function Board(props){
     const row = range(props.colNumber);
-    const signs = useMemo(() => [..."🐊🔥"]);
+    const [signs, setSigns] = useState([..."🐊🔥"]);
     const tictacmatrix = useMemo(() => (row.map(i => [...row.map(j => null)])), []);
     console.log(props.playerNum);
 
@@ -20,13 +24,13 @@ function Board(props){
         console.log("REady to place ", signs[0]);
         if (placeOnBoard(tictacmatrix, x, y, signs[0]))
             alert(signs[0] + " Won!!!");
-        
-        return new Promise((res) => (res(() => signs.push(signs.shift()))));
+        return new Promise((res) => (res(() => setSigns([...signs.slice(1), signs.at(0)]))));
     }
 
     return (
-        <>
-            <h1>Board View</h1>
+        <Container className="board-view">
+            
+            <TurnOfLabel signs={signs} />
             <Container className="d-grid justify-content-center mb-5" style={{gap: "1vw"}}>
             {console.log("Row : ", row)}
             {row.map((i) => {
@@ -45,8 +49,8 @@ function Board(props){
                 </Row>)
             })}
             </Container>
-        </>
+        </Container>
     );
 }
 
-export default Board;
+export default memo(Board, areEq);
