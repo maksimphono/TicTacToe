@@ -6,18 +6,18 @@ import $ from 'jquery';
 function BoardCellView(props){
     const [sign, setSign] = useState('');
     const selfRef = useRef('');
-    const click = event => {
-        setSign(props.signs[0]);
-        props.updateMatrix(props.x, props.y);
-        console.log(`Sim ${props.sign} on Cords: ${props.x}, ${props.y}`);
+    const handleClick = event => {
+        const rotate = props.updateMatrix(props.x, props.y)
+        rotate && setSign(props.signs[0]);
+        rotate.then(res => res());
     };
 
     useEffect(() => {
         const $self = $(selfRef.current);
-        sign && $self.attr("disabled", "true")
+        //sign && $self.attr("disabled", "true")
         const height = $self.height();
         console.log("Height : ", height);
-        $self.css("font-size", height);
+        $self.css("font-size", `${height - 10}px`);
     }, [sign]);
 
     return (
@@ -26,7 +26,7 @@ function BoardCellView(props){
                 ref = {selfRef}
                 className="btn-secondary"
                 variant="outline-dark"
-                onClick = {click}>
+                onhandleClick = {handleClick}>
                 <span>{sign}</span>
             </Button>
         </>

@@ -11,18 +11,18 @@ function range(length){
 
 function Board(props){
     const row = range(props.colNumber);
-    const signs = useMemo(() => [..."XO"]);
+    const signs = useMemo(() => [..."🐊🔥"]);
     const tictacmatrix = useMemo(() => (row.map(i => [...row.map(j => null)])), []);
     console.log(props.playerNum);
 
     const updateMatrix = (x, y) => {
+        if (tictacmatrix[x][y] !== null) return false;
+        console.log("REady to place ", signs[0]);
         if (placeOnBoard(tictacmatrix, x, y, signs[0]))
             alert(signs[0] + " Won!!!");
-        signs.push(signs.shift());
-        //signs[0] = (signs[0] + 1) % props.playerNum;
+        
+        return new Promise((res) => (res(() => signs.push(signs.shift()))));
     }
-    
-    //console.table(tictacmatrix);
 
     return (
         <>
