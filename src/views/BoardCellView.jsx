@@ -11,7 +11,8 @@ function BoardCellView(props){
         const rotate = await props.updateMatrix(props.x, props.y);
 
         if (rotate){
-            setSign(props.signs[0]);
+            $(selfRef.current).css({transform : "scaleX(.05)"});
+            setTimeout(() => {setSign(props.signs[0]); $(selfRef.current).css({transform : "scaleX(1)"})}, 500);
             rotate();
         }
     };
@@ -24,7 +25,8 @@ function BoardCellView(props){
 
     return (
         <>
-            <Button 
+            <Button
+                style={{transform : "rotate(0)"}}
                 ref = {selfRef}
                 className="btn-secondary tictakcell"
                 variant="outline-dark"
