@@ -9,6 +9,7 @@ function BoardCellView(props){
     const cellTransitionTime = useMemo(() => 0.5, []);
 
     const handleClick = async (event) => {
+        if (props.disable) return;
         const rotate = await props.updateMatrix(props.x, props.y);
         const $self = $(selfRef.current);
 

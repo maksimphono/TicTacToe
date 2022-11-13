@@ -3,11 +3,6 @@ import {Button, Dropdown, DropdownButton} from "react-bootstrap";
 import equal from "fast-deep-equal";
 
 export default memo(function TurnOfLabel({signs}){
-    //useEffect(() => console.log("Update"));
-    const [showDropDown, setShowDropDown] = useState(false);
-
-    const handleDropdownClick = (e) => (setShowDropDown(v => !v));
-    
     return (
         <div className="d-flex flex-column">
             <div id="turn-of-label" className="d-flex justify-content-between align-items-center flex-wrap mb-1 px-1">

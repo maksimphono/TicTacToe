@@ -4,7 +4,7 @@ import {Container, Row, Col} from "react-bootstrap";
 import HeaderLabel from "./Turn_of_label.jsx";
 import placeOnBoard from "../testing_win.js";
 import { useEffect } from 'react';
-import GameOverView from "./WinView.jsx";
+import {WinnerView, DefaultGameOverView} from "./WinView.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/Board_style.scss";
@@ -15,35 +15,47 @@ function range(length){
 
 function Board(props){
     const row = range(props.colNumber);
+    // Control States:
     const [signs, setSigns] = useState([..."🐊🔥"]);
+    const [disableEvery, setDisableEvery] = useState(false);
+    // Modals :
     const [showGameOver, setShowGameOver] = useState(false);
+    const [showWinner, setshowWinner] = useState(false);
+    // Static :
     const tictacmatrix = useMemo(() => (row.map(i => [...row.map(j => null)])), []);
     const fullRow = useMemo(() => Math.min(props.colNumber, 4), []);
     const colNumberSqr = useMemo(() => props.colNumber ** 2, []);
-    
     const occupiedCellNum = useRef(0);
     
     const updateMatrix = async (x, y) => {
         if (tictacmatrix[x][y] !== null) return false;
 
         if (placeOnBoard(tictacmatrix, x, y, signs[0], fullRow)){
-            setShowGameOver(true);
-            return () => null;
+            setshowWinner(true);
+            setDisableEvery(true);
+            return () => "win";
         }
         occupiedCellNum.current += 1;
         console.log("occupiedCellNum : ", occupiedCellNum.current);
         if (occupiedCellNum.current == colNumberSqr){
-            alert("Default");
-            return () => null;
+            setShowGameOver(true);
+            alert("Default")
+            return () => "gameover";
         }
         return () => setSigns([...signs.slice(1), signs.at(0)]);
     }
 
     return (
         <>
-            <GameOverView
-                show = {showGameOver}
+            <WinnerView
+                show = {showWinner}
+                disableAll = {showWinner}
                 sign = {signs[0]}
+                hide = {() => setshowWinner(false)}
+            />
+            <DefaultGameOverView 
+                show = {showGameOver}
+                restart = {() => window.location.reload(true)}
                 hide = {() => setShowGameOver(false)}
             />
 
@@ -60,6 +72,7 @@ function Board(props){
                                     x = {i} 
                                     y = {j}
                                     signs = {signs}
+                                    disable = {disableEvery}
                                     updateMatrix = {updateMatrix}
                                 />
                             </Col>
