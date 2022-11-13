@@ -17,14 +17,14 @@ function BoardCellView(props){
         //sign && $self.attr("disabled", "true")
         const height = $self.height();
         console.log("Height : ", height);
-        $self.css("font-size", `${height - 10}px`);
+        $self.css("font-size", `${height * .8}px`);
     }, [sign]);
 
     return (
         <>
             <Button 
                 ref = {selfRef}
-                className="btn-secondary"
+                className="btn-secondary tictakcell"
                 variant="outline-dark"
                 onClick = {handleClick}>
                 <span>{sign}</span>
