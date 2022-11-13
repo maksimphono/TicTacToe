@@ -6,6 +6,7 @@
 .container.board-view {
     display: flex;
     width: max-content;
+    max-width: 100vh;
     padding: 1rem;
     justify-content: center;
     flex-direction: column;
@@ -16,7 +17,7 @@
 
 #turn-of-label {
     width: 100%;
-    height: 4rem;
+    height: max-content + 1rem;
     //box-sizing: content-box;
     background-image: linear-gradient(45deg, rgba(229, 173, 84, 0.4), rgba(203, 154, 75, 0.4),);
     border-radius: .5rem;
@@ -33,18 +34,29 @@ button.game-menu-btn {
     $second-child-color: rgb(198, 162, 253), rgb(134, 96, 192), rgb(77, 56, 110);
     $third-child-color: rgb(253, 224, 162), rgb(231, 187, 93), rgb(143, 116, 58);
     display: flex;
-    max-height: 3em;
-    width: 33.3%;
-    margin-right: .5em;
     justify-content: center;
     align-items: center;
+    height: 3em;
+    max-width: 30.3%;
+    width: auto;
     border-radius: .5rem;
     border: 5px solid black;
-    svg {
-        margin: 0;
-        padding: 0;
-        transform: scale(.35);
+
+    & > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        min-height: 100%;
+        background-color: red;
+        svg {
+            height: 100%;
+            width: 100%;
+            transform: scale(1.4);
+        }
     }
+
     &:nth-child(1) {
         @include child-color($first-child-color);
     }
@@ -55,7 +67,6 @@ button.game-menu-btn {
         @include child-color($third-child-color);
     }
 }
-
 
 @media screen and (max-width: 480px){
     .container.board-view {
