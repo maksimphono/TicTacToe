@@ -6,17 +6,19 @@ import $ from 'jquery';
 function BoardCellView(props){
     const [sign, setSign] = useState('');
     const selfRef = useRef('');
-    const handleClick = event => {
-        const rotate = props.updateMatrix(props.x, props.y)
-        rotate && setSign(props.signs[0]);
-        rotate.then(res => res());
+    
+    const handleClick = async (event) => {
+        const rotate = await props.updateMatrix(props.x, props.y);
+
+        if (rotate){
+            setSign(props.signs[0]);
+            rotate();
+        }
     };
 
     useEffect(() => {
         const $self = $(selfRef.current);
-        //sign && $self.attr("disabled", "true")
         const height = $self.height();
-        console.log("Height : ", height);
         $self.css("font-size", `${height * .8}px`);
     }, [sign]);
 

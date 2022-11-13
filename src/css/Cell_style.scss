@@ -1,5 +1,6 @@
 .row {
     width: 90vh;
+    gap: 1vh;
 }
 
 .tictakcell.btn {
@@ -20,10 +21,6 @@
         height: 100%;
         color: #000;
     }
-}
-
-.col + .col {
-    margin-left: 1vh;
 }
 
 @media screen and (max-width: 480px){

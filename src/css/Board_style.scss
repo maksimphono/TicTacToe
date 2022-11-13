@@ -47,7 +47,7 @@ button.game-menu-btn {
     height: 3em;
     max-width: 30.3%;
     width: auto;
-    border-radius: .5rem;
+    border-radius: .8rem;
     border: 5px solid black;
 
     & > div {
@@ -77,11 +77,20 @@ button.game-menu-btn {
 }
 
 .dropdown-toggle {
-    background-color: rgb(245, 193, 73);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-image: radial-gradient(rgb(245, 193, 73), rgb(249, 202, 132));
     border: 5px solid rgb(181, 143, 55);
-    
+    height: 3rem;
+    width: 3rem;
+
+    svg {
+    }
+
     &::after {
-        content: "";
+        display: none;
     }
 }
 
@@ -93,9 +102,14 @@ button.game-menu-btn {
 
 .dropdown-item {
     transition: .5s;
-    background-color: rgb(245, 193, 73);
+    background-image: linear-gradient(rgb(245, 193, 73), rgb(249, 202, 132));
     border: 5px solid rgb(181, 143, 55);
+    border-radius: .8rem;
     margin-bottom: 10px;
+}
+
+.board-grid {
+    gap: 1vh;
 }
 
 @media screen and (max-width: 480px){
