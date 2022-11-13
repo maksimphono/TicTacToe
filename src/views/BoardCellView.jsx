@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import {Button} from "react-bootstrap";
 import "../css/Cell_style.scss";
 import $ from 'jquery';
 
 function BoardCellView(props){
     const [sign, setSign] = useState('');
-    const selfRef = useRef('');
+    const selfRef = useRef();
     const cellTransitionTime = useMemo(() => 0.5, []);
 
-    const handleClick = async (event) => {
+    const handleClick = useCallback(async (event) => {
         if (props.disable) return;
         const rotate = await props.updateMatrix(props.x, props.y);
         const $self = $(selfRef.current);
@@ -24,7 +24,7 @@ function BoardCellView(props){
             );
             rotate();
         }
-    };
+    }, [props.signs, props.disable]);
 
     useEffect(() => {
         $(selfRef.current).css({transition: cellTransitionTime + 's'})

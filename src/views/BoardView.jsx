@@ -1,9 +1,8 @@
-import {useState, memo, useMemo, useRef} from 'react';
-import BoardCellView from "./BoardCellView.jsx";
+import {useState, memo, useMemo, useRef, useCallback} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
+import BoardCellView from "./BoardCellView.jsx";
 import HeaderLabel from "./Turn_of_label.jsx";
 import placeOnBoard from "../testing_win.js";
-import { useEffect } from 'react';
 import {WinnerView, DefaultGameOverView} from "./WinView.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -27,7 +26,7 @@ function Board(props){
     const colNumberSqr = useMemo(() => props.colNumber ** 2, []);
     const occupiedCellNum = useRef(0);
     
-    const updateMatrix = async (x, y) => {
+    const updateMatrix = useCallback(async (x, y) => {
         if (tictacmatrix[x][y] !== null) return false;
 
         if (placeOnBoard(tictacmatrix, x, y, signs[0], fullRow)){
@@ -36,14 +35,13 @@ function Board(props){
             return () => "win";
         }
         occupiedCellNum.current += 1;
-        console.log("occupiedCellNum : ", occupiedCellNum.current);
         if (occupiedCellNum.current == colNumberSqr){
             setShowGameOver(true);
-            alert("Default")
+
             return () => "gameover";
         }
         return () => setSigns([...signs.slice(1), signs.at(0)]);
-    }
+    }, [signs]);
 
     return (
         <>
@@ -51,17 +49,18 @@ function Board(props){
                 show = {showWinner}
                 disableAll = {showWinner}
                 sign = {signs[0]}
-                hide = {() => setshowWinner(false)}
+                hide = {useCallback(() => setshowWinner(false), [])}
             />
             <DefaultGameOverView 
                 show = {showGameOver}
                 restart = {() => window.location.reload(true)}
-                hide = {() => setShowGameOver(false)}
+                hide = {useCallback(() => setShowGameOver(false), [])}
             />
 
             <Container className="board-view">
                 <h1 className="display-4 text-center">Tic Tak Toe</h1>
                 <HeaderLabel signs={signs} />
+                
                 <Container className="d-grid justify-content-center mb-5 board-grid">
                 {row.map((i) => {
                     {console.log("Render Col with i = ", i)}
@@ -85,4 +84,4 @@ function Board(props){
     );
 }
 
-export default Board;
+export default memo(Board);
