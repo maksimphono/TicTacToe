@@ -39,8 +39,9 @@ function Board(props){
                 sign = {signs[0]}
                 hide = {() => setShowGameOver(false)}
             />
-            
+
             <Container className="board-view">
+                <h1 className="display-4 text-center">Tic Tak Toe</h1>
                 <HeaderLabel signs={signs} />
                 <Container className="d-grid justify-content-center mb-5" style={{gap: "1vw"}}>
                 {console.log("Row : ", row)}
