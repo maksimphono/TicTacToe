@@ -6,16 +6,28 @@ import $ from 'jquery';
 function BoardCellView(props){
     const [sign, setSign] = useState('');
     const selfRef = useRef('');
-    
+    const cellTransitionTime = useMemo(() => 0.5, []);
+
     const handleClick = async (event) => {
         const rotate = await props.updateMatrix(props.x, props.y);
+        const $self = $(selfRef.current);
 
         if (rotate){
-            $(selfRef.current).css({transform : "scaleX(.05)"});
-            setTimeout(() => {setSign(props.signs[0]); $(selfRef.current).css({transform : "scaleX(1)"})}, 500);
+            $self.css({transform : "scaleX(.05)"});
+            setTimeout(
+                () => {
+                    setSign(props.signs[0]);
+                    $self.css({transform : "scaleX(1)"})
+                },
+                cellTransitionTime * 1000
+            );
             rotate();
         }
     };
+
+    useEffect(() => {
+        $(selfRef.current).css({transition: cellTransitionTime + 's'})
+    }, []);
 
     useEffect(() => {
         const $self = $(selfRef.current);

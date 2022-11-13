@@ -18,18 +18,21 @@ function Board(props){
     const [signs, setSigns] = useState([..."🐊🔥"]);
     const [showGameOver, setShowGameOver] = useState(false);
     const tictacmatrix = useMemo(() => (row.map(i => [...row.map(j => null)])), []);
+    const fullRow = useMemo(() => Math.min(props.colNumber, 4), []);
+    const colNumberSqr = useMemo(() => props.colNumber ** 2, []);
+    
     const occupiedCellNum = useRef(0);
     
     const updateMatrix = async (x, y) => {
         if (tictacmatrix[x][y] !== null) return false;
 
-        if (placeOnBoard(tictacmatrix, x, y, signs[0])){
+        if (placeOnBoard(tictacmatrix, x, y, signs[0], fullRow)){
             setShowGameOver(true);
             return () => null;
         }
         occupiedCellNum.current += 1;
         console.log("occupiedCellNum : ", occupiedCellNum.current);
-        if (occupiedCellNum == tictacmatrix.length * tictacmatrix.length){
+        if (occupiedCellNum.current == colNumberSqr){
             alert("Default");
             return () => null;
         }

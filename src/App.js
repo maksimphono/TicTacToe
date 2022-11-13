@@ -4,8 +4,8 @@ function App() {
   return (
     <>
       <BoardComponent
-        colNumber = {5}
-        playerNum = {4}
+        colNumber = {3}
+        playerNum = {2}
       />
     </>
   );
