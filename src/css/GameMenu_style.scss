@@ -1,0 +1,41 @@
+#root {
+    display: flex;
+    justify-content: center;
+}
+.btn {
+    width: 110% !important;
+    height: 4rem;
+    width: 8rem;
+    border-radius: 1rem;
+    border: 5px solid #0004;
+    font-size: 1.5rem !important;
+    box-shadow: 0 0 20px #0004;
+    backdrop-filter: blur(20px);
+    background-position-y: 20%;
+    background-size: 100% 140%;
+
+    &:nth-child(1) {
+        background-color: #0000;
+        background-image: linear-gradient(180deg, #c692e9c0, #956eb0c0);
+    }
+    &:nth-child(2) {
+        background-color: #0000;
+        background-image: linear-gradient(180deg, #f7d596c0, #a68f65c0);
+    }
+}
+.btn-group {
+    margin-top: 1rem;
+    width: 110% !important;
+    .btn {
+        color: #000;
+        border: 5px solid rgba(0, 0, 0, 0.404);
+        background-color: #0000;
+        &:nth-child(1){
+            background-image: linear-gradient(180deg, #ebc4abc0, #af917fc0);
+        }
+        &:nth-child(2){
+            background-image: linear-gradient(180deg, #deb3c0c0, #deb3c0c0);
+        }
+    }
+
+}

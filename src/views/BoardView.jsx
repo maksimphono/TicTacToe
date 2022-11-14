@@ -63,7 +63,6 @@ function Board(props){
                 
                 <Container className="d-grid justify-content-center mb-5 board-grid">
                 {row.map((i) => {
-                    {console.log("Render Col with i = ", i)}
                     return (<Row key = {i}>
                         {row.map(j => (
                             <Col style={{"width": "max-content", padding: "0"}} key = {i * 10 + j} className="d-grid">
@@ -81,7 +80,7 @@ function Board(props){
                 </Container>
             </Container>
         </>
-    );
+    )
 }
 
 export default memo(Board);
