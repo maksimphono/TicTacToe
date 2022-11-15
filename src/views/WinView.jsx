@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export const DefaultGameOverView = memo(function (props){
     return (
         <Modal show={props.show} backdrop="static" onHide={useCallback(props.hide)}>
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>
                     <h1>Game Over</h1>
                 </Modal.Title>

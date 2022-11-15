@@ -9,28 +9,12 @@ function BoardComponent(props){
     useEffect(() => {
         console.log(view);
     }, [view]);
-    switch (view){
-        case "GameMenu":
-            return (
-                <div id="GameMenuDiv">
-                    <GameMenu 
-                        setView = {setView}
-                    />
-                </div>
-                
-            );
-        case "Board":
-            return (
-                <div id={view}>
-                    <BoardView
-                    setView = {setView}
-                    colNumber = {5}
-                    />
-                </div>
-            )
-    }
 
-    
+    return (
+        <>
+            <BoardView colNumber = {4}/>
+        </>
+    );
 }
 
 export default BoardComponent;
