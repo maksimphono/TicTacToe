@@ -2,11 +2,11 @@ import {useState, memo, useMemo, useRef, useCallback} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 import BoardCellView from "./BoardCellView.jsx";
 import HeaderLabel from "./Turn_of_label.jsx";
-import placeOnBoard from "../testing_win.js";
+import placeOnBoard from "../../../testing_win.js";
 import {WinnerView, DefaultGameOverView} from "./WinView.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/Board_style.scss";
+import "../../../css/Board_style.scss";
 
 function range(length){
     return Array.from({ length }, (_, i) => i); 

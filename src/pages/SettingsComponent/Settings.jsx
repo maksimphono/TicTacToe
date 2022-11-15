@@ -1,9 +1,8 @@
 import {useState} from "react";
 import {Button, ButtonGroup, Container} from "react-bootstrap";
-import "../css/GameMenu_style.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-export default function GameMenu(props) {
+export default function Settings(props) {
     const [settings, changeSettings] = useState({});
 
     return (

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
 }
-button {
+button.game-menu {
     width: 110%;
     max-width: 95vw;
     height: 4rem;
@@ -14,6 +14,7 @@ button {
     background-position-y: 20%;
     background-size: 100% 140%;
     color: rgb(230, 230, 230);
+    z-index: 0;
 
     &:nth-child(1) {
         background-color: #0000;
@@ -31,7 +32,7 @@ button {
     margin-top: 1rem;
     width: 110%;
     max-width: 95vw;
-    button {
+    button.game-menu {
         color: #000;
         border: 5px solid rgba(0, 0, 0, 0.404);
         background-color: #0000;
@@ -53,12 +54,12 @@ button {
 }
 
 @media screen and (max-width: 315px) {
-    button {
+    button.game-menu {
         width: 90vw;
     }
     .btn-group {
         width: 90vw;
-        button {
+        button.game-menu {
             display: flex;
             align-items: center;
             justify-content: center !important;

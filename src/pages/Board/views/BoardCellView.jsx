@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import {Button} from "react-bootstrap";
-import "../css/Cell_style.scss";
+import "../../../css/Cell_style.scss";
 import $ from 'jquery';
 
 function BoardCellView(props){
