@@ -17,7 +17,7 @@ export default function Layout() {
         $collapse.removeClass("show");
     };
     return (
-        <div className = "d-flex flex-column justify-content-between" >
+        <div className = "d-flex flex-column justify-content-start" >
         <Navbar expand = "sm">
             <Container className = "w-75">
                 <Navbar.Brand href = "/">

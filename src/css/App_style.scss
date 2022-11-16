@@ -26,6 +26,14 @@
     }
 }
 
+select.invalid {
+    outline: 6px solid rgb(199, 1, 1);
+    background-color: rgb(199, 1, 1, .6);
+    option {
+        background-color: #fff;
+    }
+}
+
 @media screen and (max-width: 575px) {
     .navbar-nav {
         border-radius: 1rem;

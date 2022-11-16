@@ -17,7 +17,6 @@ function App() {
             />
           } 
           />
-          <Route path="Settings" element = {<Settings />} />
         </Route>
         </Routes>
       </BrowserRouter>

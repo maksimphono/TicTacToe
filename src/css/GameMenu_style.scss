@@ -2,7 +2,11 @@
     display: flex;
     justify-content: center;
 }
-button.game-menu {
+.game-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
     width: 110%;
     max-width: 95vw;
     height: 4rem;
@@ -24,7 +28,8 @@ button.game-menu {
         background-color: #0000;
         background-image: linear-gradient(180deg, #f7d596c0, #a68f65c0);
     }
-    &:active {
+    &:hover {
+        color: rgb(230, 230, 230);
         background-image: linear-gradient(180deg, #63caf099, #4791ac99);
     }
 }
@@ -32,7 +37,7 @@ button.game-menu {
     margin-top: 1rem;
     width: 110%;
     max-width: 95vw;
-    button.game-menu {
+    .game-menu {
         color: #000;
         border: 5px solid rgba(0, 0, 0, 0.404);
         background-color: #0000;
@@ -45,11 +50,11 @@ button.game-menu {
         &:nth-child(2){
             background-image: linear-gradient(180deg, #deb3c0c0, #deb3c0c0);
         }
-        &:active {
+        &:hover {
+            color: rgb(230, 230, 230);
             background-image: linear-gradient(180deg, #63caf099, #4791ac99);
         }
     }
-    
 
 }
 
