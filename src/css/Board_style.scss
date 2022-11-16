@@ -34,7 +34,7 @@
     border: .3rem solid rgba(160, 132, 56, 0.4);
 }
 
-button.game-menu-btn {
+.game-menu-btn {
     @mixin child-color($color-array) {
         border-color: nth($color-array, 3);
         background-image: radial-gradient(nth($color-array, 1) 0% 20%,nth($color-array, 2) 60% 100%);

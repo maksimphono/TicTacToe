@@ -58,7 +58,7 @@ function Board(props){
                 hide = {useCallback(() => setShowGameOver(false), [])}
             />
 
-            <Container className="board-view">
+            <Container className="board-view mt-3">
                 <h1 className="display-4 text-center">Tic Tak Toe</h1>
                 <HeaderLabel signs={signs} />
                 
