@@ -1,5 +1,6 @@
 import {useState, memo, useMemo, useRef, useCallback} from 'react';
 import {Container, Row, Col} from "react-bootstrap";
+import {Link} from "react-router-dom";
 import BoardCellView from "./BoardCellView.jsx";
 import HeaderLabel from "./Turn_of_label.jsx";
 import placeOnBoard from "../../../testing_win.js";
@@ -15,14 +16,14 @@ function range(length){
 function Board(props){
     const row = range(props.colNumber);
     // Control States:
-    const [signs, setSigns] = useState([..."🐊🔥"]);
+    const [signs, setSigns] = useState([...props.signs]);
     const [disableEvery, setDisableEvery] = useState(false);
     // Modals :
     const [showGameOver, setShowGameOver] = useState(false);
     const [showWinner, setshowWinner] = useState(false);
     // Static :
     const tictacmatrix = useMemo(() => (row.map(i => [...row.map(j => null)])), []);
-    const fullRow = useMemo(() => Math.min(props.colNumber, 4), []);
+    const fullRow = useMemo(() => props.fullRow, []);
     const colNumberSqr = useMemo(() => props.colNumber ** 2, []);
     const occupiedCellNum = useRef(0);
     

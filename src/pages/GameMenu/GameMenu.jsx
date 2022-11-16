@@ -17,10 +17,6 @@ export default function GameMenu(props) {
         playerSign2 : "O"
     });
 
-    useEffect(() => {
-        console.table(settings);
-    }, [settings]);
-
     if (settingsActive) {
         return <Settings hide = {() => setSettingsActive(false)} setSettings = {setSettings}/>
     } else 

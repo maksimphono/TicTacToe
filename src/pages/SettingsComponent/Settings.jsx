@@ -1,5 +1,5 @@
 import {useState, useRef} from "react";
-import {Button, Container, Modal, ModalBody} from "react-bootstrap";
+import {Button, Container, Modal, ModalBody, FormControl} from "react-bootstrap";
 import {Form} from "react-bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import $ from 'jquery';
@@ -36,6 +36,7 @@ export default function Settings(props) {
     const sinbolPlayer2 = useRef();
     const colNumber = useRef();
     const fullRow = useRef();
+    const settings = useRef(JSON.parse(window.localStorage.getItem("tictaktoesettings")));
 
     const playerCustomizationChange = ({target}) => {
         const pl1 = $(sinbolPlayer1.current);
@@ -59,7 +60,7 @@ export default function Settings(props) {
             playerSign2 : $(sinbolPlayer2.current).val()
         }
         if (checkValidity(newSettings)) {
-            props.setSettings(newSettings);
+            window.localStorage.setItem("tictaktoesettings", JSON.stringify(newSettings));
             props.hide();
         } else {
             setShowAlert(true);
@@ -92,8 +93,12 @@ export default function Settings(props) {
                         <Form.Label className = "h5">
                             Set number of rows at game field:
                         </Form.Label>
-                        <Form.Control type = "number" ref = {colNumber} placeholder = "3" min = "3" max = "7">
-                        </Form.Control>
+                        <FormControl 
+                            type = "number" 
+                            defaultValue = {+settings.current.colNumber} 
+                            ref = {colNumber} 
+                            placeholder = "3" 
+                            min = "3" max = "7" />
                         <span>
                             Minimun value: 3, Maximum: 7
                         </span>
@@ -103,8 +108,12 @@ export default function Settings(props) {
                         <Form.Label className = "h5">
                             Set number of signs in row to win:
                         </Form.Label>
-                        <Form.Control type = "number" ref = {fullRow} placeholder = "3" min = "3" max = "7">
-                        </Form.Control>
+                        <FormControl 
+                            type = "number" 
+                            defaultValue = {+settings.current.fullRow} 
+                            ref = {fullRow} 
+                            placeholder = "3" 
+                            min = "3" max = "7" />
                         <details>
                             <p>
                                 Specify the length of the row of same elements to win. Default value: 3, Meximum value is 7 
@@ -117,9 +126,13 @@ export default function Settings(props) {
                         </Form.Label>
                         <Form.Select name = "playerSign1" ref = {sinbolPlayer1} placeholder = "3" onChange = {playerCustomizationChange}>
                             {standartSigns.map((sign) => 
-                                <option key = {sign}>
+                                (sign == settings.current.playerSign1)?
+                                    <option key = {sign} selected>
+                                        {sign}
+                                    </option>
+                                    :<option key = {sign}>
                                     {sign}
-                                </option>
+                                    </option>
                             )}
                         </Form.Select>
                         <span>Select or enter any unicode character, you want to play</span>
@@ -130,7 +143,7 @@ export default function Settings(props) {
                         </Form.Label>
                         <Form.Select name = "playerSign2" ref = {sinbolPlayer2} placeholder = "3" onChange = {playerCustomizationChange}>
                             {standartSigns.map((sign) => 
-                                (sign == "O")?
+                                (sign == settings.current.playerSign2)?
                                     <option key = {sign} selected>
                                         {sign}
                                     </option>
