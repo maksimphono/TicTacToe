@@ -1,4 +1,6 @@
 import BoardComponent from "./pages/Board/components/BoardComponent.jsx";
+import LogInView from "./pages/LogIn/LogInVIew.jsx";
+import SignUpView from "./pages/SignUp/SignUpView.jsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import GameMenu from "./pages/GameMenu/GameMenu.jsx";
 import Layout from "./Layout.js";
@@ -15,8 +17,10 @@ function App() {
               colNumber = {4}
               playerNum = {2}
             />
-          } 
+          }
           />
+          <Route path="LogIn" element = {<LogInView />} />
+          <Route path="SignUp" element = {<SignUpView />} />
         </Route>
         </Routes>
       </BrowserRouter>

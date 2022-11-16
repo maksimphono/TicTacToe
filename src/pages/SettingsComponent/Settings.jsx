@@ -155,7 +155,7 @@ export default function Settings(props) {
                         <span>Select or enter any unicode character, you want to play</span>
                     </Form.Group>
                     <div className = "d-flex justify-content-center" style = {{width: "auto", "grid-column": "1 / span 2"}}>
-                        <Button className = "settings-submit-button w-25 game-menu" type="submit">
+                        <Button className = "settings-submit-button game-menu" type="submit" style = {{"minWidth": "30%", width: "30%"}}>
                             Submit
                         </Button>
                     </div>
