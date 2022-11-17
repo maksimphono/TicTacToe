@@ -21,7 +21,7 @@ export default function Layout() {
         <Navbar expand = "sm">
             <Container className = "w-75">
                 <Navbar.Brand href = "/">
-                    <i class="bi bi-grid-3x3"></i> Tic Tak Toe
+                    <i className="bi bi-grid-3x3"></i> Tic Tak Toe
                 </Navbar.Brand>
                 <Navbar.Toggle area-controls = "main-nav">
                 </Navbar.Toggle>

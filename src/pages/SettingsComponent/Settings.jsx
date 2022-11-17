@@ -1,6 +1,8 @@
 import {useState, useRef} from "react";
-import {Button, Container, Modal, ModalBody, FormControl} from "react-bootstrap";
+import {Button, Container, FormControl} from "react-bootstrap";
 import {Form} from "react-bootstrap";
+
+import ValidityAlert from "../AdditionComponents/FormInvalidAlert.jsx";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import $ from 'jquery';
 
@@ -8,26 +10,6 @@ const standartSigns = [..."XO🦊🐀🐵🦈🐠🐞🐝🌸🌻"];
 
 function checkValidity(settings) {
     return settings.playerSign1 !== settings.playerSign2;
-}
-
-function ValidityAlert({hide, show}){
-    return (
-        <Modal show = {show}>
-            <Modal.Header>
-                <Modal.Title>
-                    OOOOps...
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                    <p>Please, make sure all fields are set correctly</p>
-            </Modal.Body>
-            <Modal.Footer>
-                    <Button variant = "secondary" className = "border border-3 border-light w-25" onClick = {hide}>
-                        Close
-                    </Button>
-            </Modal.Footer>
-        </Modal>
-    )
 }
 
 export default function Settings(props) {

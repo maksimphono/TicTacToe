@@ -1,0 +1,13 @@
+.container:has(.sign-up-form) {
+    border-radius: 1rem;
+    background-color: rgba(92, 167, 204, .3);
+    padding: 1rem;
+    backdrop-filter: blur(2px);
+    max-width: 90vw;
+    box-shadow: 0 0 10px rgb(46, 46, 46);
+}
+.sign-up-form {
+    & > * {
+        width: 50%;
+    }
+}

@@ -26,7 +26,8 @@
     }
 }
 
-select.invalid {
+select.invalid,
+input.invalid {
     outline: 6px solid rgb(199, 1, 1);
     background-color: rgb(199, 1, 1, .6);
     option {
