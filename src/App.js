@@ -3,6 +3,7 @@ import LogInView from "./pages/LogIn/LogInVIew.jsx";
 import SignUpView from "./pages/SignUp/SignUpView.jsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import GameMenu from "./pages/GameMenu/GameMenu.jsx";
+import UserDetails from "./pages/UserDetails/UserDetails.jsx";
 import Layout from "./Layout.js";
 import Settings from "./pages/SettingsComponent/Settings.jsx";
 
@@ -21,6 +22,7 @@ function App() {
           />
           <Route path="LogIn" element = {<LogInView />} />
           <Route path="SignUp" element = {<SignUpView />} />
+          <Route path="Userdetails" element = {<UserDetails />} />
         </Route>
         </Routes>
       </BrowserRouter>

@@ -1,0 +1,30 @@
+.user-data-container {
+    grid-template: auto / 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 2rem 1rem;
+    height: max-content;
+    background-color: rgba(183, 183, 183, 0.6);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgb(81, 81, 81);
+
+    * {
+        padding: .5rem;
+        height: max-content;
+    }
+    .user-img {
+        grid-area: 1 / 1 / span 1 / span 1;
+        background-color: red;
+    }
+    .user-info {
+        grid-area: 1 / 2 / span 1 / span 2;
+        background-color: blue;
+    }
+    .user-statistic {
+        grid-column: 1 / span 3;
+        background-color: rgb(125, 135, 165);
+    }
+}
+
+
+
