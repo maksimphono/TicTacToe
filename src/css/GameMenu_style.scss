@@ -20,11 +20,11 @@
     color: rgb(230, 230, 230);
     z-index: 0;
 
-    &:nth-child(1) {
+    &:nth-child(odd) {
         background-color: #0000;
         background-image: linear-gradient(180deg, #c692e9c0, #956eb0c0);
     }
-    &:nth-child(2) {
+    &:nth-child(even) {
         background-color: #0000;
         background-image: linear-gradient(180deg, #f7d596c0, #a68f65c0);
     }
@@ -39,6 +39,8 @@
     max-width: 95vw;
     .game-menu {
         color: #000;
+        width: 110%;
+        max-width: 95vw;
         border: 5px solid rgba(0, 0, 0, 0.404);
         background-color: #0000;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

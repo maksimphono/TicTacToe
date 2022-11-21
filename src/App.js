@@ -6,26 +6,34 @@ import GameMenu from "./pages/GameMenu/GameMenu.jsx";
 import UserDetails from "./pages/UserDetails/UserDetails.jsx";
 import Layout from "./Layout.js";
 import Settings from "./pages/SettingsComponent/Settings.jsx";
+import { Auth0Provider } from "@auth0/auth0-react";
+import {domain, clientId} from "./secret_codes.js";
 
 function App() {
   return (
-      <BrowserRouter>
-        <Routes>
-        <Route path="/" element = {<Layout />}>
-          <Route index element = {<GameMenu />} />
-          <Route path="Board" element = {
-            <BoardComponent
-              colNumber = {4}
-              playerNum = {2}
+      <Auth0Provider
+        domain = {domain}
+        clientId = {clientId}
+        redirectUri={window.location.origin}
+      >
+        <BrowserRouter>
+          <Routes>
+          <Route path="/" element = {<Layout />}>
+            <Route index element = {<GameMenu />} />
+            <Route path="Board" element = {
+              <BoardComponent
+                colNumber = {4}
+                playerNum = {2}
+              />
+            }
             />
-          }
-          />
-          <Route path="LogIn" element = {<LogInView />} />
-          <Route path="SignUp" element = {<SignUpView />} />
-          <Route path="Userdetails" element = {<UserDetails />} />
-        </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route path="LogIn" element = {<LogInView />} />
+            <Route path="SignUp" element = {<SignUpView />} />
+            <Route path="Userdetails" element = {<UserDetails />} />
+          </Route>
+          </Routes>
+        </BrowserRouter>
+      </Auth0Provider>
   );
 }
 
