@@ -121,7 +121,7 @@ export default function Settings(props) {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label className = "h5">
-                            Customize player 2 (AI):
+                            Customize player 2:
                         </Form.Label>
                         <Form.Select name = "playerSign2" ref = {sinbolPlayer2} placeholder = "3" onChange = {playerCustomizationChange}>
                             {standartSigns.map((sign) => 

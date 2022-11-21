@@ -61,7 +61,7 @@ export default function LogInView(props){
                         className = "btn-outline-dark rounded-pill border border-3 border-dark w-50"
                         style = {{maxWidth: "max-content", height: "max-content", "fontSize" : "1.2rem", gridColumn: "1 / 2"}}
                     >
-                    <i class="bi bi-arrow-left"></i>
+                    <i className="bi bi-arrow-left"></i>
                     </Button>
                 </Link>
                 <h1 className = "d-flex justify-content-center">Sign Up</h1>

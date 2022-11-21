@@ -5,9 +5,11 @@ import BoardCellView from "./BoardCellView.jsx";
 import HeaderLabel from "./Turn_of_label.jsx";
 import placeOnBoard from "../../../testing_win.js";
 import {WinnerView, DefaultGameOverView} from "./WinView.jsx";
+import findBestMove from "../components/minimax_algirithm.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../css/Board_style.scss";
+import { useEffect } from 'react';
 
 function range(length){
     return Array.from({ length }, (_, i) => i); 
@@ -23,9 +25,11 @@ function Board(props){
     const [showWinner, setshowWinner] = useState(false);
     // Static :
     const tictacmatrix = useMemo(() => (row.map(i => [...row.map(j => null)])), []);
+    const clickMatrix = useMemo(() => (row.map(i => [...row.map(j => null)])), []);
     const fullRow = useMemo(() => props.fullRow, []);
     const colNumberSqr = useMemo(() => props.colNumber ** 2, []);
     const occupiedCellNum = useRef(0);
+    const moveTurn = useRef(-2);
     
     const updateMatrix = useCallback(async (x, y) => {
         if (tictacmatrix[x][y] !== null) return false;
@@ -43,7 +47,18 @@ function Board(props){
         }
         return () => setSigns([...signs.slice(1), signs.at(0)]);
     }, [signs]);
-
+    /*
+    useEffect(() => {
+        if (moveTurn.current > 0){
+            const [x, y] = findBestMove(tictacmatrix, placeOnBoard, () => null);
+            //updateMatrix(x, y);
+            clickMatrix[x][y] && clickMatrix[x][y](null);
+        }
+        console.log("moveTurn", moveTurn.current);
+        moveTurn.current++;
+        moveTurn.current %= signs.length;
+    }, [signs]);
+    */
     return (
         <>
             <WinnerView
@@ -72,6 +87,7 @@ function Board(props){
                                     y = {j}
                                     signs = {signs}
                                     disable = {disableEvery}
+                                    clickMatrix = {clickMatrix}
                                     updateMatrix = {updateMatrix}
                                 />
                             </Col>

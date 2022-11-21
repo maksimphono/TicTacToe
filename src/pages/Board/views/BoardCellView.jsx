@@ -27,7 +27,8 @@ function BoardCellView(props){
     }, [props.signs, props.disable]);
 
     useEffect(() => {
-        $(selfRef.current).css({transition: cellTransitionTime + 's'})
+        props.clickMatrix[props.x][props.y] = handleClick;
+        $(selfRef.current).css({transition: cellTransitionTime + 's'});
     }, []);
 
     useEffect(() => {
