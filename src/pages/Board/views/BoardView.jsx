@@ -11,6 +11,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../css/Board_style.scss";
 import { useEffect } from 'react';
 
+import {removeFromBoard} from "../../../testing_win.js";
+
 function range(length){
     return Array.from({ length }, (_, i) => i); 
 }
@@ -49,12 +51,12 @@ function Board(props){
     }, [signs]);
     
     useEffect(() => {
-        console.log("Sign : ", signs[0]);
         if (moveTurn.current > 0){
-            console.log("Comp turn");
-            const [x, y] = findBestMove(tictacmatrix, placeOnBoard, () => null);
+            const [x, y] = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
             clickMatrix[x][y] && clickMatrix[x][y](null);
+            console.table(tictacmatrix);
         }
+
         moveTurn.current++;
         moveTurn.current %= signs.length;
     }, [signs]);

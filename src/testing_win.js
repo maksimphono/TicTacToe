@@ -30,3 +30,9 @@ export default function placeOnBoard(board, x, y, sign, fullRow){
     }
     return false;
 }
+export function removeFromBoard(board, x, y){
+    for (let gr in board[x][y].groups){
+        board[x][y].groups[gr] && board[x][y].groups[gr][0]--;
+    }
+    board[x][y] = null;
+}
