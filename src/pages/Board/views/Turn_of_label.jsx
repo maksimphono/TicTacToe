@@ -21,7 +21,7 @@ export default memo(function TurnOfLabel({signs}){
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item
-                            eventKey="1"
+                            eventkey="1"
                             className="d-flex justify-content-between align-items-center"
                             onClick = {useCallback(() => window.location.reload(true), [])}
                         >    
@@ -33,7 +33,7 @@ export default memo(function TurnOfLabel({signs}){
                         </Dropdown.Item>
                         <Link
                             to = "/"
-                            eventKey="2"
+                            eventkey="2"
                             className="d-flex justify-content-between align-items-center dropdown-item"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">

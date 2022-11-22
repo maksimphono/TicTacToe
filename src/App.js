@@ -8,8 +8,12 @@ import Layout from "./Layout.js";
 import Settings from "./pages/SettingsComponent/Settings.jsx";
 import { Auth0Provider } from "@auth0/auth0-react";
 import {domain, clientId} from "./secret_codes.js";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    console.log("render App");
+  }, []);
   return (
       <Auth0Provider
         domain = {domain}
@@ -22,8 +26,6 @@ function App() {
             <Route index element = {<GameMenu />} />
             <Route path="Board" element = {
               <BoardComponent
-                colNumber = {4}
-                playerNum = {2}
               />
             }
             />

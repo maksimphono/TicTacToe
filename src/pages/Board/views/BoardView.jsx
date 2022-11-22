@@ -18,7 +18,7 @@ function range(length){
 function Board(props){
     const row = range(props.colNumber);
     // Control States:
-    const [signs, setSigns] = useState([...props.signs]);
+    let [signs, setSigns] = useState([...props.signs]);
     const [disableEvery, setDisableEvery] = useState(false);
     // Modals :
     const [showGameOver, setShowGameOver] = useState(false);
@@ -29,11 +29,11 @@ function Board(props){
     const fullRow = useMemo(() => props.fullRow, []);
     const colNumberSqr = useMemo(() => props.colNumber ** 2, []);
     const occupiedCellNum = useRef(0);
-    const moveTurn = useRef(-2);
+    const moveTurn = useRef(0); // initial value = 0 in order to player moves second, -2 in order to computer moves second
     
     const updateMatrix = useCallback(async (x, y) => {
         if (tictacmatrix[x][y] !== null) return false;
-
+        console.log("update m");
         if (placeOnBoard(tictacmatrix, x, y, signs[0], fullRow)){
             setshowWinner(true);
             setDisableEvery(true);
@@ -47,18 +47,18 @@ function Board(props){
         }
         return () => setSigns([...signs.slice(1), signs.at(0)]);
     }, [signs]);
-    /*
+    
     useEffect(() => {
+        console.log("Sign : ", signs[0]);
         if (moveTurn.current > 0){
+            console.log("Comp turn");
             const [x, y] = findBestMove(tictacmatrix, placeOnBoard, () => null);
-            //updateMatrix(x, y);
             clickMatrix[x][y] && clickMatrix[x][y](null);
         }
-        console.log("moveTurn", moveTurn.current);
         moveTurn.current++;
         moveTurn.current %= signs.length;
     }, [signs]);
-    */
+    
     return (
         <>
             <WinnerView

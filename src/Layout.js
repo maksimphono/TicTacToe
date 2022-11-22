@@ -2,13 +2,15 @@ import {Outlet, Link} from "react-router-dom";
 import {Container, Nav, Navbar} from 'react-bootstrap';
 import "./css/App_style.scss";
 import $ from "jquery";
-
-
+import { useEffect } from "react";
 
 export default function Layout() {
     const NavLinkCollapsed = function (props) {
         return <Link to = {props.to} className="nav-link" onClick={collapse}>{props.children}</Link>
     }
+    useEffect(() => {
+        console.log("render Layout");
+    }, []);
     const collapse = (e) => {
         const $toggler = $(".navbar-toggler");
         const $collapse = $(".navbar-collapse");

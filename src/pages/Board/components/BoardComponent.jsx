@@ -7,19 +7,15 @@ function BoardComponent(props){
     const settings = useRef(JSON.parse(window.localStorage.getItem("tictaktoesettings")));
 
     useEffect(() => {
-        console.table(settings);
-    }, [])
-
-    useEffect(() => {
-        console.log(view);
-    }, [view]);
+        console.log("rerender board comp");
+    }, []);
 
     return (
         <>
             <BoardView 
                 colNumber = {0 + settings.current.colNumber}
                 fullRow = {0 + settings.current.fullRow}
-                signs = {settings.current.playerSign1 + settings.current.playerSign2}
+                signs = {settings.current.playerSign2 + settings.current.playerSign1}
             />
         </>
     );
