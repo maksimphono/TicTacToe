@@ -122,5 +122,10 @@ export default function findBestMove(board, placeOnBoard, winCallback, _signs, s
         }
     }
     console.log("Best value is ", bestVal, "for", ...bestMove);
+    if (bestVal === -1000){
+        do {
+            bestMove = [Math.floor(Math.random() * board.length), Math.floor(Math.random() * board.length)];
+        } while (board[bestMove[0]][bestMove[1]]);
+    }
     return bestMove;
 }

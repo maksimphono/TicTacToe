@@ -53,7 +53,7 @@ function Board(props){
     useEffect(() => {
         if (moveTurn.current > 0){
             const [x, y] = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
-            clickMatrix[x][y] && clickMatrix[x][y](null);
+            clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null);
             console.table(tictacmatrix);
         }
 
