@@ -20,12 +20,17 @@ export default function placeOnBoard(board, x, y, sign, fullRow){
                 pivotCell.groups[gr][0] += oppositeCell.groups[gr][0];
                 oppositeCell.groups[gr] = pivotCell.groups[gr];
             }
-            pivotCell.groups[gr][0]++;
-            newSign.groups[gr] = pivotCell.groups[gr];
-            console.log("newSign Group set up to ", newSign.groups[gr][0]);
-            if (newSign.groups[gr][0] >= fullRow){
-                return true;
+            try {
+                pivotCell.groups[gr][0]++;
+                newSign.groups[gr] = pivotCell.groups[gr];
+                //console.log("newSign Group set up to ", newSign.groups[gr][0]);
+                if (newSign.groups[gr][0] >= fullRow){
+                    return true;
+                }
+            } catch (TypeError){
+                console.log("type err");
             }
+            
         }
     }
     return false;
@@ -34,5 +39,6 @@ export function removeFromBoard(board, x, y){
     for (let gr in board[x][y].groups){
         board[x][y].groups[gr] && board[x][y].groups[gr][0]--;
     }
+    
     board[x][y] = null;
 }
