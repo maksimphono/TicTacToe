@@ -51,10 +51,17 @@ function Board(props){
     }, [signs]);
     
     useEffect(() => {
+        console.log("rerender Board");
         if (moveTurn.current > 0){
-            const [x, y] = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
-            clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null);
-            console.table(tictacmatrix);
+            const prom = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
+            
+            prom.then(([x, y]) => {
+                    clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null);
+                    console.table(tictacmatrix);      
+                }
+            );
+            //clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null);
+            //console.table(tictacmatrix);
         }
 
         moveTurn.current++;

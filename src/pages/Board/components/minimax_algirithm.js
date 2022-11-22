@@ -90,7 +90,7 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
     }
 }
 
-export default function findBestMove(board, placeOnBoard, winCallback, _signs, signsNum, fullRow){
+export default async function findBestMove(board, placeOnBoard, winCallback, _signs, signsNum, fullRow){
     /*
     placeOnBoard(newB, 1, 1, _signs[0], fullRow);
     console.table(newB);

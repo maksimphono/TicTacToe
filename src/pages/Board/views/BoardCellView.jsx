@@ -7,6 +7,7 @@ function BoardCellView(props){
     const [sign, setSign] = useState('');
     const selfRef = useRef();
     const cellTransitionTime = useMemo(() => 0.5, []);
+    const rotateCallback = useRef(() => null);
 
     const handleClick = useCallback(async (event) => {
         if (props.disable) return;
@@ -22,7 +23,9 @@ function BoardCellView(props){
                 },
                 cellTransitionTime * 1000
             );
-            rotate();
+            rotateCallback.current = rotate;
+        } else {
+            rotateCallback.current = () => null;
         }
     }, [props.signs, props.disable]);
 
@@ -32,6 +35,8 @@ function BoardCellView(props){
     }, []);
 
     useEffect(() => {
+        console.log("rerender CellView");
+        rotateCallback.current();
         const $self = $(selfRef.current);
         const height = $self.height();
         $self.css("font-size", `${height * .8}px`);
