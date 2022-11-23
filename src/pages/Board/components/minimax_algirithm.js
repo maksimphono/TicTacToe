@@ -60,14 +60,15 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board.length; j++){
                 if (board[i][j] == null){
-                    newBoard = copyBoard(board);
-                    if (placeOnBoard(newBoard, i, j, signs[0], fullRow)){
+                    newBoard = board;
+                    if (placeOnBoard(board, i, j, signs[0], fullRow)){
                         return 10 / (depth + 1);
                     }
                     best = Math.max(
                         best,
-                        minimax(newBoard, depth + 1, !isMax, signs, fullRow, signsNum + 1, alpha, beta)
+                        minimax(board, depth + 1, !isMax, signs, fullRow, signsNum + 1, alpha, beta)
                     );
+                    removeFromBoard(board, i, j);
                     alpha = Math.max(alpha, best);
                     if (beta <= alpha)
                         break
@@ -83,14 +84,15 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board.length; j++){
                 if (board[i][j] == null){
-                    newBoard = copyBoard(board);
-                    if (placeOnBoard(newBoard, i, j, signs[1], fullRow)){
+                    newBoard = board;
+                    if (placeOnBoard(board, i, j, signs[1], fullRow)){
                         return -10 / (depth + 1);
                     }
                     best = Math.min(
                         best,
-                        minimax(newBoard, depth + 1, !isMax, signs, fullRow, signsNum + 1, alpha, beta)
+                        minimax(board, depth + 1, !isMax, signs, fullRow, signsNum + 1, alpha, beta)
                     );
+                    removeFromBoard(board, i, j);
                     beta = Math.min(beta, best);
                     if (beta <= alpha)
                         break
@@ -105,6 +107,7 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
 }
 
 export default async function findBestMove(board, placeOnBoard, winCallback, _signs, signsNum, fullRow){
+    //return [Math.floor(Math.random() * board.length), Math.floor(Math.random() * board.length)];
     /*
     placeOnBoard(newB, 1, 1, _signs[0], fullRow);
     console.table(newB);

@@ -63,7 +63,13 @@ function Board(props){
             //clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null);
             //console.table(tictacmatrix);
         }
-
+        /*
+        setTimeout(() => {
+            removeFromBoard(tictacmatrix, 1, 1);
+            console.log("After remove:");
+            console.table(tictacmatrix);
+        }, 1000);
+        */
         moveTurn.current++;
         moveTurn.current %= signs.length;
     }, [signs]);
