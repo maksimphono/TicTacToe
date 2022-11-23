@@ -69,10 +69,7 @@ export function removeFromBoard(board, x, y){
             console.log(x - dx, y - dy, "group set to ", board[x - dx][y - dy].groups[gr][0]);
         }
     }
-    } catch (TypeError) {
-        ;
-    }
-
+    } catch(TypeError){;}
     delete board[x][y];
     board[x][y] = null;
 }
