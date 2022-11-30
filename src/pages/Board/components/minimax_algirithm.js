@@ -61,7 +61,7 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
             for (let j = 0; j < board.length; j++){
                 //setTimeout(() => null, 500);
                 if (board[i][j] == null){
-                    newBoard = board;
+                    newBoard = copyBoard(board);
                     if (placeOnBoard(board, i, j, signs[0], fullRow)){
                         return 10 / (depth + 1);
                     }
@@ -69,7 +69,7 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
                         best,
                         minimax(board, depth + 1, !isMax, signs, fullRow, signsNum + 1, alpha, beta)
                     );
-                    removeFromBoard(board, i, j);
+                    //removeFromBoard(board, i, j);
                     alpha = Math.max(alpha, best);
                     if (beta <= alpha)
                         break
@@ -85,7 +85,7 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board.length; j++){
                 if (board[i][j] == null){
-                    newBoard = board;
+                    newBoard = copyBoard(board);
                     if (placeOnBoard(board, i, j, signs[1], fullRow)){
                         return -10 / (depth + 1);
                     }
@@ -93,7 +93,7 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
                         best,
                         minimax(board, depth + 1, !isMax, signs, fullRow, signsNum + 1, alpha, beta)
                     );
-                    removeFromBoard(board, i, j);
+                    //removeFromBoard(board, i, j);
                     beta = Math.min(beta, best);
                     if (beta <= alpha)
                         break

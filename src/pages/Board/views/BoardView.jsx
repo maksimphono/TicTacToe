@@ -58,9 +58,6 @@ function Board(props){
             const result = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
             
             result.then(([x, y]) => clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null));
-            
-            
-            //console.table(tictacmatrix);
         }
         moveTurn.current++;
         moveTurn.current %= signs.length;

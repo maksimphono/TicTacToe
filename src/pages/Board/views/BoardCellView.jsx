@@ -11,35 +11,34 @@ function BoardCellView(props){
 
     useEffect(() => {
         props.clickMatrix[props.x][props.y] = handleClick;
-        $(selfRef.current).css({transition: cellTransitionTime + 's'});
+        const height = $(selfRef.current).height();
+        $(selfRef.current).css({transition: cellTransitionTime + 's', "font-size" : `${height * .8}px`});
     }, []);
 
     const handleClick = useCallback(async (event) => {
         if (props.disable) return;
-        const rotate = await props.updateMatrix(props.x, props.y);
+        //const rotate = await props.updateMatrix(props.x, props.y);
         const $self = $(selfRef.current);
+        const rotate = await props.updateMatrix(props.x, props.y);
 
         if (rotate){
-            console.log("rotate:", rotate);
+            //console.log("rotate:", rotate);
             $self.css({transform : "scaleX(.05)"});
+
+            setTimeout(() => {
+                setSign(props.signs[0]); 
+            }, cellTransitionTime * 1000);
             
-            setTimeout(() => setSign(props.signs[0]), cellTransitionTime * 1000);
-            
-            rotateCallback.current = rotate;
-            
-        } else {
-            rotateCallback.current = () => null;
         }
+        rotateCallback.current = rotate;
+        
     }, [props.signs, props.disable]);
 
     useEffect(() => {
         const $self = $(selfRef.current);
-        const height = $self.height();
-        $self.css("font-size", `${height * .8}px`);
+
         $self.css({transform : "scaleX(1)"});
-        console.log("rerender CellView");
-        rotateCallback.current && rotateCallback.current();
-        
+        rotateCallback.current();
     }, [sign]);
 
     return (
