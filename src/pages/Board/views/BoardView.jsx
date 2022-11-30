@@ -32,7 +32,8 @@ function Board(props){
     const colNumberSqr = useMemo(() => props.colNumber ** 2, []);
     const occupiedCellNum = useRef(0);
     const moveTurn = useRef(0); // initial value = 0 in order to player moves second, -2 in order to computer moves second
-    
+    //const myWorker = useMemo(() => new Worker("../components/minimax_algirithm.js"), []);
+
     const updateMatrix = useCallback(async (x, y) => {
         if (tictacmatrix[x][y] !== null) return false;
         console.log("update m");
@@ -53,17 +54,14 @@ function Board(props){
     useEffect(() => {
         console.log("rerender Board");
         if (moveTurn.current > 0){
-            const prom = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
             
-            prom.then(([x, y]) => {
-                    clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null);
-                    console.table(tictacmatrix);      
-                }
-            );
-            //clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null);
+            const result = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
+            
+            result.then(([x, y]) => clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null));
+            
+            
             //console.table(tictacmatrix);
         }
-
         moveTurn.current++;
         moveTurn.current %= signs.length;
     }, [signs]);

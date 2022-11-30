@@ -1,6 +1,6 @@
 import placeOnBoard from "../../../testing_win";
-import {removeFromBoard} from "../../../testing_win";
 
+//const placeOnBoard = (e) => null;
 function copyCell(cell){
     return {
         groups : {
@@ -56,9 +56,10 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
     if (!isMovesLeft(board, signsNum) || depth >= 6) return 0;
 
     if (isMax) {
-        best = -1000;
+        best = -Infinity;
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board.length; j++){
+                //setTimeout(() => null, 500);
                 if (board[i][j] == null){
                     newBoard = copyBoard(board);
                     if (placeOnBoard(newBoard, i, j, signs[0], fullRow)){
@@ -74,12 +75,12 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
                 }
             }
             if (beta <= alpha)
-                        break
+                break
         }
         if (score) return score;
         return best;
     } else {
-        best = 1000;
+        best = Infinity;
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board.length; j++){
                 if (board[i][j] == null){
