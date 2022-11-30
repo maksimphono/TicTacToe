@@ -104,71 +104,69 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
     }
 }
 
-export default async function findBestMove(board, placeOnBoard, winCallback, _signs, signsNum, fullRow){
-    /*
-    placeOnBoard(newB, 1, 1, _signs[0], fullRow);
-    console.table(newB);
-    console.table(board);
-    return [Math.floor(Math.random() * board.length), Math.floor(Math.random() * board.length)];
-    */
-    let bestVal = -1000;
-    let moveVal;
-    let newBoard = null;
-    let bestMove = [0, 0];
-    const signs = [..._signs];
-    let checkCellQueue = new Set();
+export default function findBestMove(){
+    this.onmessage = (message) => {
 
-    for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board.length; j++){
-            if (board[i][j] != null) {
-                getNeighbours(board, i, j).forEach((pair) => checkCellQueue.add(JSON.stringify(pair)));
+        let bestVal = -1000;
+        let moveVal;
+        const {fullRow, signsNum, board} = message.data;
+        let newBoard = null;
+        let bestMove = [0, 0];
+        const signs = [...message.data._signs];
+        let checkCellQueue = new Set();
+
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board.length; j++){
+                if (board[i][j] != null) {
+                    getNeighbours(board, i, j).forEach((pair) => checkCellQueue.add(JSON.stringify(pair)));
+                }
             }
         }
-    }
-    /*
-    console.log("Cell queue : ", checkCellQueue);
-    for (let cell of checkCellQueue) {
-        const [i, j] = JSON.parse(cell);
-        newBoard = copyBoard(board);
-        console.log("trying to place sign on ", i, j);
-        if (placeOnBoard(newBoard, i, j, signs[0], fullRow)){
-            bestMove = [i, j];
-            bestVal = 10;
-        }
-    
-        moveVal = minimax(newBoard, 0, false, signs, fullRow, signsNum);
-        console.log("counted value ", moveVal, "for", i, j);
-        if (moveVal > bestVal){
-            bestMove = [i, j];
-            bestVal = moveVal;
-        }
-    }
-    */
-    
-    for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board.length; j++){
+        /*
+        console.log("Cell queue : ", checkCellQueue);
+        for (let cell of checkCellQueue) {
+            const [i, j] = JSON.parse(cell);
             newBoard = copyBoard(board);
-            if (board[i][j] == null) {
-                if (placeOnBoard(newBoard, i, j, signs[0], fullRow)){
-                    bestMove = [i, j];
-                    bestVal = 10;
-                }
+            console.log("trying to place sign on ", i, j);
+            if (placeOnBoard(newBoard, i, j, signs[0], fullRow)){
+                bestMove = [i, j];
+                bestVal = 10;
+            }
+        
+            moveVal = minimax(newBoard, 0, false, signs, fullRow, signsNum);
+            console.log("counted value ", moveVal, "for", i, j);
+            if (moveVal > bestVal){
+                bestMove = [i, j];
+                bestVal = moveVal;
+            }
+        }
+        */
+        
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board.length; j++){
+                newBoard = copyBoard(board);
+                if (board[i][j] == null) {
+                    if (placeOnBoard(newBoard, i, j, signs[0], fullRow)){
+                        bestMove = [i, j];
+                        bestVal = 10;
+                    }
 
-                moveVal = minimax(newBoard, 0, false, signs, fullRow, signsNum);
-                console.log("counted value ", moveVal, "for", i, j);
-                if (moveVal > bestVal){
-                    bestMove = [i, j];
-                    bestVal = moveVal;
+                    moveVal = minimax(newBoard, 0, false, signs, fullRow, signsNum);
+                    console.log("counted value ", moveVal, "for", i, j);
+                    if (moveVal > bestVal){
+                        bestMove = [i, j];
+                        bestVal = moveVal;
+                    }
                 }
             }
         }
-    }
-    
-    console.log("Best value is ", bestVal, "for", ...bestMove);
-    if (bestVal == -1000){
-        do {
-            bestMove = [Math.floor(Math.random() * board.length), Math.floor(Math.random() * board.length)];
-        } while (board[bestMove[0]][bestMove[1]]);
-    }
-    return bestMove;
+        
+        console.log("Best value is ", bestVal, "for", ...bestMove);
+        if (bestVal == -1000){
+            do {
+                bestMove = [Math.floor(Math.random() * board.length), Math.floor(Math.random() * board.length)];
+            } while (board[bestMove[0]][bestMove[1]]);
+        }
+        postMessage(bestMove);
+    }  
 }

@@ -5,19 +5,23 @@ import BoardCellView from "./BoardCellView.jsx";
 import HeaderLabel from "./Turn_of_label.jsx";
 import placeOnBoard from "../../../testing_win.js";
 import {WinnerView, DefaultGameOverView} from "./WinView.jsx";
-import findBestMove from "../components/minimax_algirithm.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../css/Board_style.scss";
 import { useEffect } from 'react';
 
-import {removeFromBoard} from "../../../testing_win.js";
+import WorkerBuilder from '../../../WebWorkers/worker-builder.js';
+import findBestMove from '../../../WebWorkers/fibo.worker.js';
+
+const minimaxWorker = new WorkerBuilder(findBestMove);
 
 function range(length){
     return Array.from({ length }, (_, i) => i); 
 }
 
 function Board(props){
+    const minimaxWorker = new WorkerBuilder(findBestMove);
+
     const row = range(props.colNumber);
     // Control States:
     let [signs, setSigns] = useState([...props.signs]);
@@ -55,9 +59,16 @@ function Board(props){
         console.log("rerender Board");
         if (moveTurn.current > 0){
             
-            const result = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
+            minimaxWorker.onmessage = (message) => {
+                console.log("Result from worker: ", message.data);
+            }
+
+            minimaxWorker.postMessage({board : tictacmatrix, placeOnBoard : placeOnBoard, _signs : signs, signsNum : occupiedCellNum.current, fullRow : fullRow});
+
+            //const result = findBestMove(tictacmatrix, placeOnBoard, () => alert("comp won!"), signs, occupiedCellNum.current, fullRow);
             
-            result.then(([x, y]) => clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null));
+            //clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null)
+            //result.then(([x, y]) => clickMatrix[x] && clickMatrix[x][y] && clickMatrix[x][y](null));
             
             
             //console.table(tictacmatrix);
