@@ -59,7 +59,6 @@ function minimax(board, depth, isMax, signs, fullRow, signsNum, alpha = -1000, b
         best = -Infinity;
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board.length; j++){
-                //setTimeout(() => null, 500);
                 if (board[i][j] == null){
                     newBoard = copyBoard(board);
                     if (placeOnBoard(newBoard, i, j, signs[0], fullRow)){
@@ -126,6 +125,7 @@ export default async function findBestMove(board, placeOnBoard, winCallback, _si
             }
         }
     }
+    /*
     console.log("Cell queue : ", checkCellQueue);
     for (let cell of checkCellQueue) {
         const [i, j] = JSON.parse(cell);
@@ -143,7 +143,7 @@ export default async function findBestMove(board, placeOnBoard, winCallback, _si
             bestVal = moveVal;
         }
     }
-    /*
+    */
     
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board.length; j++){
@@ -163,7 +163,7 @@ export default async function findBestMove(board, placeOnBoard, winCallback, _si
             }
         }
     }
-    */
+    
     console.log("Best value is ", bestVal, "for", ...bestMove);
     if (bestVal == -1000){
         do {
